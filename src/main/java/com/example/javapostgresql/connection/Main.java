@@ -1,4 +1,7 @@
 package com.example.javapostgresql.connection;
+
+import com.example.javapostgresql.repository.Db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,6 +27,24 @@ public class Main {
         } catch (SQLException e) {
             System.err.println("Erreur lors de la connexion à la base de données");
             e.printStackTrace();
+        }
+    }
+    private static Connection connection;
+    public static Connection getConnection(){
+        if(connection != null)
+            return connection;
+
+        try{
+            connection = DriverManager.getConnection(
+                    Db.DB_URL,
+                    Db.DB_USERNAME,
+                    Db.DB_PASSWORD
+            );
+            return connection;
+        }
+        catch (SQLException error){
+            System.out.println(error.getMessage());
+            throw new RuntimeException("Connection failed");
         }
     }
 }
