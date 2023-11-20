@@ -1,4 +1,4 @@
-package RickaPrincy.repository;
+package com.example.javapostgresql.repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
